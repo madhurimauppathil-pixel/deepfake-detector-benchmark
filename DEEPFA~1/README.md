@@ -43,14 +43,17 @@ The script prints the dataset's label names on first run — check this against 
 
 ## Results
 
-*Run `benchmark.py` and paste the printed table / `results.csv` here.*
-
 | Model | Accuracy | False Positive Rate | Avg. Latency (ms) | n |
 |---|---|---|---|---|
-| dima806/deepfake_vs_real_image_detection | — | — | — | — |
-| prithivMLmods/Deep-Fake-Detector-v2-Model | — | — | — | — |
-| prithivMLmods/Deepfake-Detect-Siglip2 | — | — | — | — |
+| dima806/deepfake_vs_real_image_detection | 0.990 | 0.010 | 809.0 | 200 |
+| prithivMLmods/Deep-Fake-Detector-v2-Model | 0.100 | 0.959 | 696.4 | 200 |
+| prithivMLmods/Deepfake-Detect-Siglip2 | 0.525 | 0.103 | 745.5 | 200 |
 
+**Findings**
+
+Across a 200-image sample, results varied sharply between detectors. `dima806/deepfake_vs_real_image_detection` performed strongly (99.0% accuracy, 1.0% false positive rate). `prithivMLmods/Deepfake-Detect-Siglip2` performed close to chance (52.5% accuracy) — consistent with this proposal's premise that many publicly available detection tools are unreliable outside their original training distribution.
+
+`prithivMLmods/Deep-Fake-Detector-v2-Model` returned the lowest measured accuracy (10.0%). A manual check of its raw predictions against ground truth revealed every error was a clean inversion — real images confidently labeled "Deepfake," fake images confidently labeled "Realism" — rather than the noisy mix a genuinely weak model produces. Since the other two detectors scored sensibly against the same labels, this points to a label-mapping inconsistency in that model's published configuration rather than a fair test of its real-world capability. This is reported as measured rather than corrected, since it is itself a relevant finding: publicly available detection tools can fail in ways invisible without manual validation — directly supporting this proposal's identified gap around the untested reliability of existing tools.
 ## Limitations
 
 - Sample size defaults to 200 images for a quick first pass — raise `SAMPLE_SIZE` for a statistically meaningful benchmark before citing these numbers anywhere formal.
