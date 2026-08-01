@@ -1,6 +1,0 @@
-transformers>=4.40
-datasets>=2.19
-torch>=2.2
-pillow
-scikit-learn
-kagglehub  # optional -- only needed for load_from_kaggle()
