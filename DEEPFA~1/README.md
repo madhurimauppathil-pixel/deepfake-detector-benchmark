@@ -49,6 +49,8 @@ The script prints the dataset's label names on first run — check this against 
 | prithivMLmods/Deep-Fake-Detector-v2-Model | 0.100 | 0.959 | 696.4 | 200 |
 | prithivMLmods/Deepfake-Detect-Siglip2 | 0.525 | 0.103 | 745.5 | 200 |
 
+![Results comparison chart](results_chart.png)
+
 **Findings**
 
 Across a 200-image sample, results varied sharply between detectors. `dima806/deepfake_vs_real_image_detection` performed strongly (99.0% accuracy, 1.0% false positive rate). `prithivMLmods/Deepfake-Detect-Siglip2` performed close to chance (52.5% accuracy) — consistent with this proposal's premise that many publicly available detection tools are unreliable outside their original training distribution.
